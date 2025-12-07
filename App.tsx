@@ -79,17 +79,17 @@ const App: React.FC = () => {
 
   const handleGenerate = async (isUpdate: boolean = false) => {
     if (!currentKey) {
-        // Attempt to get key if using the Google AI Studio IDX environment (Only for Gemini)
-        if (selectedModel === ModelProvider.Gemini && window.aistudio && window.aistudio.openSelectKey) {
-            await window.aistudio.openSelectKey();
-             if (process.env.API_KEY) {
-                handleKeyChange(process.env.API_KEY);
-             }
-        } else {
-             setError(`请提供 ${selectedModel} 的 API 密钥。`);
-             setShowKeyInput(true);
-             return;
+      // Attempt to get key if using the Google AI Studio IDX environment (Only for Gemini)
+      if (selectedModel === ModelProvider.Gemini && window.aistudio && window.aistudio.openSelectKey) {
+        await window.aistudio.openSelectKey();
+        if (process.env.API_KEY) {
+          handleKeyChange(process.env.API_KEY);
         }
+      } else {
+        setError(`请提供 ${selectedModel} 的 API 密钥。`);
+        setShowKeyInput(true);
+        return;
+      }
     }
 
     if (!prompt.trim()) {
